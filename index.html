@@ -1,0 +1,2264 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ahirete Hazırlık Değerlendirmesi | Hereafter Readiness Assessment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-soft: #020819;
+      --card-bg: #020617;
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.12);
+      --accent-strong: #4ade80;
+      --accent-2: #38bdf8;
+      --danger: #f97373;
+      --warn: #facc15;
+      --text-main: #f9fafb;
+      --text-soft: #9ca3af;
+      --border: #1f2937;
+      --radius-lg: 18px;
+      --shadow-soft: 0 22px 50px rgba(0, 0, 0, 0.65);
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.28s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #0f172a 0, #020617 50%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+    }
+
+    body.loaded {
+      opacity: 1;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+
+    header.hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, #0f766e 0, #020617 40%, #020617 100%);
+      border-radius: 28px;
+      padding: 20px 20px 24px;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 28px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    @media (min-width: 768px) {
+      header.hero {
+        padding: 26px 32px 30px;
+      }
+    }
+
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .hero-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .hero-main {
+      max-width: 620px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #dcfce7;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.75);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-kicker-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent-strong);
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.5);
+    }
+
+    .hero-title {
+      margin-top: 12px;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      line-height: 1.15;
+      font-weight: 700;
+      color: #f9fafb;
+    }
+
+    .hero-subtitle {
+      margin-top: 10px;
+      font-size: 0.96rem;
+      line-height: 1.7;
+      color: rgba(226, 232, 240, 0.92);
+    }
+
+    .hero-meta {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.78rem;
+      color: #e5e7eb;
+      opacity: 0.9;
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .hero-meta-icon {
+      font-size: 0.9rem;
+    }
+
+    .hero-cta-row {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.9rem;
+      border-radius: 999px;
+      padding: 9px 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+        background var(--transition-fast), border-color var(--transition-fast),
+        color var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #022c22;
+      font-weight: 600;
+      box-shadow: 0 14px 30px rgba(34, 197, 94, 0.55);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(34, 197, 94, 0.7);
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #e5e7eb;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 0.96);
+      transform: translateY(-1px);
+    }
+
+    .hero-orb {
+      position: absolute;
+      right: -50px;
+      top: -60px;
+      width: 210px;
+      height: 210px;
+      background:
+        radial-gradient(circle at 30% 20%, #f9fafb 0, #22c55e 30%, #0f766e 60%, transparent 70%);
+      opacity: 0.4;
+      filter: blur(1px);
+      pointer-events: none;
+      animation: orbit 16s linear infinite;
+    }
+
+    @media (max-width: 767px) {
+      .hero-orb {
+        width: 150px;
+        height: 150px;
+        right: -30px;
+        top: -30px;
+      }
+    }
+
+    @keyframes orbit {
+      0% { transform: translate(0,0) rotate(0deg); }
+      50% { transform: translate(-10px,10px) rotate(140deg); }
+      100% { transform: translate(0,0) rotate(360deg); }
+    }
+
+    .hero-aside {
+      align-self: stretch;
+      position: relative;
+      z-index: 2;
+      margin-top: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .hero-aside {
+        max-width: 280px;
+        margin-top: 0;
+      }
+    }
+
+    .lang-switch {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 12px;
+      gap: 6px;
+    }
+
+    .lang-btn {
+      font-size: 0.8rem;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #e5e7eb;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background var(--transition-fast), color var(--transition-fast),
+        border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .lang-btn span.flag {
+      font-size: 1rem;
+    }
+
+    .lang-btn.active {
+      background: #f9fafb;
+      color: #020617;
+      border-color: transparent;
+      transform: translateY(-1px);
+    }
+
+    .aside-card {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 20px;
+      padding: 14px 14px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.6);
+      font-size: 0.78rem;
+      color: #e5e7eb;
+    }
+
+    .aside-card h3 {
+      margin: 0 0 8px;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #bbf7d0;
+    }
+
+    .dot-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 8px);
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .dot-grid span {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.7);
+      opacity: 0.7;
+      animation: pulseDots 2.2s ease-in-out infinite;
+    }
+
+    .dot-grid span:nth-child(2),
+    .dot-grid span:nth-child(5),
+    .dot-grid span:nth-child(10),
+    .dot-grid span:nth-child(15) {
+      background: var(--accent);
+    }
+
+    .dot-grid span:nth-child(2) { animation-delay: 0.1s; }
+    .dot-grid span:nth-child(5) { animation-delay: 0.25s; }
+    .dot-grid span:nth-child(10) { animation-delay: 0.45s; }
+    .dot-grid span:nth-child(15) { animation-delay: 0.65s; }
+
+    @keyframes pulseDots {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.4); opacity: 1; }
+    }
+
+    main {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, #111827 0, #020617 55%);
+      border-radius: var(--radius-lg);
+      padding: 18px 16px 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        padding: 22px 22px 22px;
+      }
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, var(--accent-soft), transparent 55%);
+      opacity: 0;
+      transition: opacity var(--transition-med);
+      pointer-events: none;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #e5e7eb;
+    }
+
+    .card-title-badge {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #cbd5f5;
+    }
+
+    .card-body {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .card-body p {
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .pill {
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      color: #9ca3af;
+    }
+
+    form#assessment-form {
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .grid-basic {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+      gap: 10px;
+    }
+
+    @media (max-width: 640px) {
+      .grid-basic {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.86rem;
+    }
+
+    .field label {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .field span.helper {
+      font-size: 0.76rem;
+      color: var(--text-soft);
+    }
+
+    input[type="number"],
+    select {
+      padding: 7px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color var(--transition-fast),
+        box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    input[type="number"]:focus,
+    select:focus {
+      border-color: var(--accent-2);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.6);
+      background: rgba(15, 23, 42, 1);
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .question-section {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    }
+
+    .question-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .question-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .question-section-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .question-section-desc {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .question {
+      margin-top: 10px;
+      padding: 9px 10px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      transition: border-color var(--transition-fast),
+        background var(--transition-fast), transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+    }
+
+    .question:hover {
+      border-color: rgba(34, 197, 94, 0.8);
+      background: rgba(15, 23, 42, 1);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.7);
+    }
+
+    .question-label {
+      font-size: 0.86rem;
+      margin-bottom: 6px;
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.82rem;
+      margin-top: 2px;
+    }
+
+    .option-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .option-row input[type="radio"] {
+      accent-color: var(--accent);
+    }
+
+    .option-label {
+      color: var(--text-soft);
+    }
+
+    .progress-container {
+      margin-top: 8px;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      transition: width 0.3s ease-out;
+    }
+
+    .form-footer {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(55, 65, 81, 0.9);
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    .form-footer-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-top: 6px;
+    }
+
+    .note strong {
+      color: #e5e7eb;
+    }
+
+    .results-card {
+      opacity: 0;
+      transform: translateY(8px);
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.35s ease, transform 0.35s ease, max-height 0.35s ease;
+    }
+
+    .results-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      max-height: 800px;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .result-pill {
+      background: rgba(15, 23, 42, 0.98);
+      border-radius: 16px;
+      padding: 10px 11px;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-pill::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.16), transparent 60%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .result-label {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-bottom: 2px;
+    }
+
+    .result-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #e5e7eb;
+    }
+
+    .result-tagline {
+      font-size: 0.8rem;
+      margin-top: 4px;
+      color: #e5e7eb;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--text-soft);
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+    }
+
+    .badge-dot.green { background: var(--accent); }
+    .badge-dot.yellow { background: var(--warn); }
+    .badge-dot.red { background: var(--danger); }
+
+    .focus-areas {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(55, 65, 81, 0.9);
+      font-size: 0.82rem;
+    }
+
+    .focus-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .focus-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px dashed rgba(55, 65, 81, 0.9);
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    footer {
+      margin-top: 18px;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      text-align: center;
+      opacity: 0.85;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-orb"></div>
+      <div class="hero-inner">
+        <div class="hero-main">
+          <div class="hero-kicker">
+            <span class="hero-kicker-dot"></span>
+            <span data-i18n="kicker">
+              Kur’an & Sünnet ekseninde muhasebe / Qur’an & Sunnah–inspired self-accounting
+            </span>
+          </div>
+          <h1 class="hero-title" data-i18n="heroTitle">
+            Ahirete Hazırlık Değerlendirmesi
+          </h1>
+          <p class="hero-subtitle" data-i18n="heroSubtitle">
+            Bu anket, Kur’an ve sahih Sünnet’in temel ilkeleri ışığında; inanç, ibadet, ahlak,
+            kul hakları, ilim, tövbe ve kalp hâli üzerinde durarak, kendini “hesaba çekmen”
+            için hazırlanmış bir öz-muhasebe aracıdır. Kimsenin hükmünü vermez; sadece
+            uyanmaya ve yönünü düzeltmeye yardım etmeyi amaçlar.
+          </p>
+          <div class="hero-meta">
+            <span><span class="hero-meta-icon">⏱️</span><span data-i18n="metaTime">Süre: 7–12 dakika</span></span>
+            <span><span class="hero-meta-icon">🕊️</span><span data-i18n="metaFocus">İman, amel, ahlak ve kalp</span></span>
+            <span><span class="hero-meta-icon">🔒</span><span data-i18n="metaPrivacy">Yanıtların tarayıcıda kalır; sunucuya gönderilmez</span></span>
+          </div>
+          <div class="hero-cta-row">
+            <button class="btn btn-primary" id="start-btn">
+              <span data-i18n="btnStart">Muhasebeye Başla</span> <span>▶</span>
+            </button>
+            <button class="btn btn-ghost" id="scroll-info-btn">
+              <span data-i18n="btnLearn">Testin yaklaşımı</span>
+            </button>
+          </div>
+        </div>
+        <div class="hero-aside">
+          <div class="lang-switch">
+            <button class="lang-btn active" data-lang="tr" id="lang-tr">
+              <span class="flag">🇹🇷</span> <span>Türkçe</span>
+            </button>
+            <button class="lang-btn" data-lang="en" id="lang-en">
+              <span class="flag">🇬🇧</span> <span>English</span>
+            </button>
+          </div>
+          <div class="aside-card">
+            <h3 data-i18n="asideTitle">Önemli uyarı</h3>
+            <p data-i18n="asideText">
+              Bu test, Allah katındaki değerini, cennete veya cehenneme gidişini <strong>belirlemez</strong>.
+              Kalpleri ve niyetleri en iyi bilen yalnızca Allah’tır. Buradaki amaç, klasik “ölmeden önce 
+              kendini hesaba çek” tavsiyesini, modern bir öz-değerlendirme aracıyla desteklemektir.
+              Fıkhi bir meselede mutlaka ehil bir âlime danışmalısın.
+            </p>
+            <div class="dot-grid" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="card" id="info-card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span data-i18n="infoTitle">Bu değerlendirme neyi amaçlıyor?</span>
+            <span class="card-title-badge" data-i18n="infoBadge">İman + amel + ahlak + kalp</span>
+          </h2>
+        </div>
+        <div class="card-body">
+          <p data-i18n="infoP1">
+            Kur’an ve sahih Sünnet’te; tevhid, salih amel, güzel ahlak, kul hakları, takva,
+            tövbe ve ihlas sürekli vurgulanır. Bu test, bu büyük başlıkların altına giren bazı 
+            güncel davranış ve kalp hallerini sorarak, senin dünyadaki yönelişini “tahmini” bir
+            şekilde görmene yardım eder.
+          </p>
+          <p data-i18n="infoP2">
+            Sorular; ilim (bilgi), amel (uygulama) ve kalp (niyet, ihlas, tevazu) boyutunu ayrı 
+            ayrı puanlamaya çalışır ve bunlardan bir “Ahirete Hazırlık Skoru” üretir. Bu skor kesin 
+            bir hüküm değil, sadece nerede güçlenmek isteyebileceğini gösteren bir işarettir.
+          </p>
+          <div class="pill-row">
+            <span class="pill" data-i18n="pillIman">🕋 Tevhid & iman esasları</span>
+            <span class="pill" data-i18n="pillIbadah">🕌 İbadet & salih amel</span>
+            <span class="pill" data-i18n="pillAkhlaq">🤝 Ahlak & kul hakları</span>
+            <span class="pill" data-i18n="pillQalb">✨ Kalp, tövbe & ihlas</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="form-card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span data-i18n="formTitle">Kişisel Muhasebe Formu</span>
+            <span class="card-title-badge" data-i18n="formBadge">Ahirete hazırlık puanı</span>
+          </h2>
+        </div>
+        <div class="card-body">
+          <form id="assessment-form">
+            <div class="grid-basic">
+              <div class="field">
+                <label for="age-input" data-i18n="labelAge">Kronolojik yaşın (yıl)</label>
+                <input
+                  type="number"
+                  id="age-input"
+                  name="age"
+                  min="10"
+                  max="100"
+                  required
+                  placeholder="Örn. 28" />
+                <span class="helper" data-i18n="helperAge">
+                  Sadece yorum kısmında kullanılır; puan doğrudan yaşa göre değil, cevaplara göre hesaplanır.
+                </span>
+              </div>
+              <div class="field">
+                <label for="faith-level" data-i18n="labelFaith">Kendini aşağıdakilerden hangisine daha yakın görüyorsun?</label>
+                <select id="faith-level" name="faithLevel">
+                  <option value="muslim_practicing" data-i18n="faithPracticing">Müslümanım, hem inanç hem amel yönünden bağlı kalmaya çalışıyorum</option>
+                  <option value="muslim_cultural" data-i18n="faithCultural">Müslümanım ama çoğu şeyi kültürel ve dağınık yaşıyorum</option>
+                  <option value="exploring" data-i18n="faithExploring">İslam’ı anlamaya/araştırmaya çalışıyorum</option>
+                  <option value="other" data-i18n="faithOther">Farklı bir inanca sahibim veya emin değilim</option>
+                </select>
+                <span class="helper" data-i18n="helperFaith">
+                  Bu bilgi sadece yorum dilini biraz uyarlamak için kullanılır; kimse için hüküm vermez.
+                </span>
+              </div>
+            </div>
+
+            <div class="progress-container">
+              <span id="progress-text" data-i18n="progressText">Yanıtlanan soru: 0 / 0</span>
+              <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+              </div>
+            </div>
+
+            <div id="question-sections"></div>
+
+            <div class="form-footer">
+              <div>
+                <span data-i18n="footerLeft">
+                  Lütfen mümkün olduğunca dürüst ol; bu test sadece seninle Allah arasında bir öz muhasebe niyetindedir.
+                </span>
+              </div>
+              <div class="form-footer-right">
+                <span class="badge">
+                  <span class="badge-dot green"></span>
+                  <span data-i18n="badgeGood">Salih amel ve ihlas puanı yükseltir</span>
+                </span>
+                <span class="badge">
+                  <span class="badge-dot.red"></span>
+                  <span data-i18n="badgeRisk">Israr edilen günahlar ve gaflet puanı düşürür</span>
+                </span>
+                <button type="submit" class="btn btn-primary">
+                  <span data-i18n="btnCalculate">Sonucu Hesapla</span> <span>📊</span>
+                </button>
+              </div>
+            </div>
+            <p class="note" data-i18n="noteDisclaimer">
+              <strong>Önemli:</strong> Bu test ne bir fetva, ne de kesin hüküm aracıdır. Günah, tövbe veya
+              özel bir fıkhi mesele hakkında endişen varsa ehil bir âlime veya güvenilir ilim ehline danışmalısın.
+              Bu araç sadece düzenli öz muhasebe alışkanlığı kazandırmak içindir.
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <section class="card results-card" id="results-card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span data-i18n="resultsTitle">Sonuçların</span>
+            <span class="card-title-badge" data-i18n="resultsBadge">Özet & odak alanları</span>
+          </h2>
+        </div>
+        <div class="card-body">
+          <div class="results-grid">
+            <div class="result-pill">
+              <div class="result-label" data-i18n="resChronological">Kronolojik yaşın</div>
+              <div class="result-value"><span id="res-age-chronological">–</span></div>
+            </div>
+            <div class="result-pill">
+              <div class="result-label" data-i18n="resKnowledge">İlim boyutu (bilgi) puanın</div>
+              <div class="result-value"><span id="res-knowledge">–</span> / 100</div>
+              <div class="result-tagline" id="res-knowledge-tagline">—</div>
+            </div>
+            <div class="result-pill">
+              <div class="result-label" data-i18n="resPractice">Amel boyutu (uygulama) puanın</div>
+              <div class="result-value"><span id="res-practice">–</span> / 100</div>
+              <div class="result-tagline" id="res-practice-tagline">—</div>
+            </div>
+            <div class="result-pill">
+              <div class="result-label" data-i18n="resHeart">Kalp boyutu (ihlas, tövbe, tevazu) puanın</div>
+              <div class="result-value"><span id="res-heart">–</span> / 100</div>
+              <div class="result-tagline" id="res-heart-tagline">—</div>
+            </div>
+            <div class="result-pill">
+              <div class="result-label" data-i18n="resReadiness">Genel Ahirete Hazırlık Skoru</div>
+              <div class="result-value"><span id="res-readiness">–</span> / 100</div>
+            </div>
+          </div>
+
+          <div class="focus-areas">
+            <p id="res-interpretation">
+              <!-- JS fills with language-specific text -->
+            </p>
+            <div>
+              <span data-i18n="focusTitle">
+                Öne çıkan “dikkat edilebilecek alanlar”:
+              </span>
+              <div class="focus-chip-row" id="focus-chip-row">
+                <!-- JS adds chips -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span data-i18n="footerText">
+        Bu araç, klasik İslami öz-muhasebe geleneğini destekleyen modern bir hatırlatıcıdır.
+        Her şeyin en doğrusunu bilen yalnızca Allah’tır. Kodunu GitHub’da barındırabilir ve dilediğin gibi geliştirebilirsin.
+      </span>
+    </footer>
+  </div>
+
+  <script>
+    // --- UI TEXT (TR & EN) ---
+    const uiText = {
+      tr: {
+        kicker: "Kur’an & Sünnet ekseninde muhasebe / Qur’an & Sunnah–inspired self-accounting",
+        heroTitle: "Ahirete Hazırlık Değerlendirmesi",
+        heroSubtitle:
+          "Bu anket, Kur’an ve sahih Sünnet’in temel ilkeleri ışığında; inanç, ibadet, ahlak, kul hakları, ilim, tövbe ve kalp hâli üzerinde durarak, kendini “hesaba çekmen” için hazırlanmış bir öz-muhasebe aracıdır. Kimsenin hükmünü vermez; sadece uyanmaya ve yönünü düzeltmeye yardım etmeyi amaçlar.",
+        metaTime: "Süre: 7–12 dakika",
+        metaFocus: "İman, amel, ahlak ve kalp",
+        metaPrivacy: "Yanıtların tarayıcıda kalır; sunucuya gönderilmez",
+        btnStart: "Muhasebeye Başla",
+        btnLearn: "Testin yaklaşımı",
+        asideTitle: "Önemli uyarı",
+        asideText:
+          "Bu test, Allah katındaki değerini, cennete veya cehenneme gidişini <strong>belirlemez</strong>. Kalpleri ve niyetleri en iyi bilen yalnızca Allah’tır. Buradaki amaç, klasik “ölmeden önce kendini hesaba çek” tavsiyesini modern bir öz-değerlendirme aracıyla desteklemektir. Fıkhi bir meselede mutlaka ehil bir âlime danışmalısın.",
+        infoTitle: "Bu değerlendirme neyi amaçlıyor?",
+        infoBadge: "İman + amel + ahlak + kalp",
+        infoP1:
+          "Kur’an ve sahih Sünnet’te; tevhid, salih amel, güzel ahlak, kul hakları, takva, tövbe ve ihlas sürekli vurgulanır. Bu test, bu büyük başlıkların altına giren bazı güncel davranış ve kalp hallerini sorarak, senin dünyadaki yönelişini “tahmini” bir şekilde görmene yardım eder.",
+        infoP2:
+          "Sorular; ilim (bilgi), amel (uygulama) ve kalp (niyet, ihlas, tevazu) boyutunu ayrı ayrı puanlamaya çalışır ve bunlardan bir “Ahirete Hazırlık Skoru” üretir. Bu skor kesin bir hüküm değil, sadece nerede güçlenmek isteyebileceğini gösteren bir işarettir.",
+        pillIman: "🕋 Tevhid & iman esasları",
+        pillIbadah: "🕌 İbadet & salih amel",
+        pillAkhlaq: "🤝 Ahlak & kul hakları",
+        pillQalb: "✨ Kalp, tövbe & ihlas",
+        formTitle: "Kişisel Muhasebe Formu",
+        formBadge: "Ahirete hazırlık puanı",
+        labelAge: "Kronolojik yaşın (yıl)",
+        helperAge:
+          "Sadece yorum kısmında kullanılır; puan doğrudan yaşa göre değil, cevaplara göre hesaplanır.",
+        labelFaith: "Kendini aşağıdakilerden hangisine daha yakın görüyorsun?",
+        faithPracticing: "Müslümanım, hem inanç hem amel yönünden bağlı kalmaya çalışıyorum",
+        faithCultural: "Müslümanım ama çoğu şeyi kültürel ve dağınık yaşıyorum",
+        faithExploring: "İslam’ı anlamaya/araştırmaya çalışıyorum",
+        faithOther: "Farklı bir inanca sahibim veya emin değilim",
+        helperFaith:
+          "Bu bilgi sadece yorum dilini biraz uyarlamak için kullanılır; kimse için hüküm vermez.",
+        progressText: "Yanıtlanan soru: 0 / 0",
+        footerLeft:
+          "Lütfen mümkün olduğunca dürüst ol; bu test sadece seninle Allah arasında bir öz muhasebe niyetindedir.",
+        badgeGood: "Salih amel ve ihlas puanı yükseltir",
+        badgeRisk: "Israr edilen günahlar ve gaflet puanı düşürür",
+        btnCalculate: "Sonucu Hesapla",
+        noteDisclaimer:
+          "<strong>Önemli:</strong> Bu test ne bir fetva, ne de kesin hüküm aracıdır. Günah, tövbe veya özel bir fıkhi mesele hakkında endişen varsa ehil bir âlime veya güvenilir ilim ehline danışmalısın. Bu araç sadece düzenli öz muhasebe alışkanlığı kazandırmak içindir.",
+        resultsTitle: "Sonuçların",
+        resultsBadge: "Özet & odak alanları",
+        resChronological: "Kronolojik yaşın",
+        resKnowledge: "İlim boyutu (bilgi) puanın",
+        resPractice: "Amel boyutu (uygulama) puanın",
+        resHeart: "Kalp boyutu (ihlas, tövbe, tevazu) puanın",
+        resReadiness: "Genel Ahirete Hazırlık Skoru",
+        focusTitle: "Öne çıkan “dikkat edilebilecek alanlar”:",
+        footerText:
+          "Bu araç, klasik İslami öz-muhasebe geleneğini destekleyen modern bir hatırlatıcıdır. Her şeyin en doğrusunu bilen yalnızca Allah’tır. Kodunu GitHub’da barındırabilir ve dilediğin gibi geliştirebilirsin.",
+      },
+      en: {
+        kicker: "Qur’an & Sunnah–inspired self-accounting",
+        heroTitle: "Hereafter Readiness Assessment",
+        heroSubtitle:
+          "This questionnaire, inspired by the Qur’an and authentic Sunnah, invites you to reflect on belief, worship, character, people’s rights, knowledge, repentance and heart state. It does not judge who is saved; it simply supports the classical advice to “take yourself to account before you are taken to account.”",
+        metaTime: "Time: 7–12 minutes",
+        metaFocus: "Faith, practice, character and heart",
+        metaPrivacy: "Your answers stay in your browser; nothing is sent to a server",
+        btnStart: "Start Self-Accountability",
+        btnLearn: "How this test works",
+        asideTitle: "Important note",
+        asideText:
+          "This test does <strong>not</strong> determine your status with Allah, nor your final place in the Hereafter. Only Allah truly knows hearts and intentions. The purpose is to support the classical Islamic practice of self-accounting in a modern format. For any legal/fiqh issue you must consult qualified scholars.",
+        infoTitle: "What is the goal of this assessment?",
+        infoBadge: "Faith + practice + character + heart",
+        infoP1:
+          "The Qur’an and authentic Sunnah repeatedly emphasize tawheed, righteous deeds, good character, people’s rights, taqwa, repentance and sincerity. This test uses questions about modern daily life and heart states under these themes to help you see where your direction may be leaning.",
+        infoP2:
+          "The questions try to separately estimate knowledge, practice and heart (intention, sincerity, humility), then compute a “Hereafter Readiness Score.” This is not a verdict; it is a sign of where you might want to strengthen yourself.",
+        pillIman: "🕋 Tawheed & core beliefs",
+        pillIbadah: "🕌 Worship & righteous deeds",
+        pillAkhlaq: "🤝 Character & people’s rights",
+        pillQalb: "✨ Heart, repentance & sincerity",
+        formTitle: "Personal Self-Accounting Form",
+        formBadge: "Hereafter readiness score",
+        labelAge: "Chronological age (years)",
+        helperAge:
+          "Used only in the interpretation text; the score is based on your answers, not your age directly.",
+        labelFaith: "Which description fits you the most right now?",
+        faithPracticing: "I am Muslim and I try to be committed in belief and practice",
+        faithCultural: "I am Muslim but I live it mostly in a cultural / scattered way",
+        faithExploring: "I am exploring / trying to understand Islam",
+        faithOther: "I follow another path or I’m not sure",
+        helperFaith:
+          "This information only shapes the tone of the feedback a little; it does not give a verdict about anyone.",
+        progressText: "Answered questions: 0 / 0",
+        footerLeft:
+          "Please be as honest as you can; this test is intended only as self-reflection between you and Allah.",
+        badgeGood: "Sincere righteous deeds increase your score",
+        badgeRisk: "Persisting in sins and heedlessness lowers it",
+        btnCalculate: "Calculate Results",
+        noteDisclaimer:
+          "<strong>Important:</strong> This is not a fatwa and not a tool of final judgment. If you have worries about sin, repentance or any specific legal issue, speak to qualified scholars or trusted students of knowledge. This tool is only to encourage regular self-accounting.",
+        resultsTitle: "Your Results",
+        resultsBadge: "Summary & focus areas",
+        resChronological: "Your chronological age",
+        resKnowledge: "Knowledge dimension score",
+        resPractice: "Practice dimension score",
+        resHeart: "Heart dimension score (sincerity, repentance, humility)",
+        resReadiness: "Overall Hereafter Readiness Score",
+        focusTitle: "Highlighted areas to gently focus on:",
+        footerText:
+          "This tool is a modern reminder inspired by the classical Islamic tradition of self-accounting. Allah alone knows everything perfectly. You can host and extend the code on GitHub as you like.",
+      },
+    };
+
+    // --- QUESTION DEFINITIONS ---
+    // Each question contributes to knowledge, practice, heart and overall readiness
+    const questionSectionsDef = [
+      {
+        id: "aqeedah",
+        title: {
+          tr: "İman & tevhid farkındalığı",
+          en: "Faith & tawheed awareness",
+        },
+        desc: {
+          tr: "İmanın temeli: Allah’a, ahirete, meleklere, kitaplara, peygamberlere ve kadere iman.",
+          en: "Foundations of faith: belief in Allah, the Hereafter, angels, books, messengers and divine decree.",
+        },
+        questions: [
+          {
+            id: "aqeedah_certainty",
+            text: {
+              tr: "Allah’a, ahirete ve temel iman esaslarına dair içindeki yakîn (kalp huzuru ve kesinlik) hâlini nasıl tarif edersin?",
+              en: "How would you describe your inner certainty (yaqeen) about Allah, the Hereafter and the core pillars of faith?",
+            },
+            options: [
+              {
+                value: "a",
+                text: {
+                  tr: "Çok sık şüpheleniyorum ve bu konuları pek düşünmek istemiyorum",
+                  en: "I often feel doubtful and tend to avoid thinking about these matters",
+                },
+                knowledgeDelta: -8,
+                practiceDelta: -3,
+                heartDelta: -6,
+              },
+              {
+                value: "b",
+                text: {
+                  tr: "Bazen şüphelerim oluyor ama cevap aramaya çalışıyorum",
+                  en: "I sometimes have doubts but I try to seek answers",
+                },
+                knowledgeDelta: -2,
+                practiceDelta: 0,
+                heartDelta: -1,
+              },
+              {
+                value: "c",
+                text: {
+                  tr: "Genelde emin hissediyorum, ara sıra içim daralsa da temel imanım sağlam",
+                  en: "I usually feel secure in faith even if I occasionally feel low or confused",
+                },
+                knowledgeDelta: +2,
+                practiceDelta: +1,
+                heartDelta: +2,
+              },
+              {
+                value: "d",
+                text: {
+                  tr: "Temel iman esaslarında derin bir huzur ve teslimiyet hissediyorum",
+                  en: "I feel deep tranquility and submission regarding the core pillars of faith",
+                },
+                knowledgeDelta: +4,
+                practiceDelta: +2,
+                heartDelta: +4,
+              },
+            ],
+          },
+          {
+            id: "aqeedah_shahada",
+            text: {
+              tr: "“La ilahe illallah Muhammedun Resulullah” şehadetini kalbinde yenileme ve anlamını tefekkür etme hâlin nasıldır?",
+              en: "How often do you renew and reflect on the meaning of the shahadah in your heart?",
+            },
+            options: [
+              {
+                value: "a",
+                text: {
+                  tr: "Sadece dilimde, anlamını nadiren düşünüyorum",
+                  en: "Mostly on my tongue only; I rarely reflect on its meaning",
+                },
+                knowledgeDelta: -3,
+                practiceDelta: -2,
+                heartDelta: -4,
+              },
+              {
+                value: "b",
+                text: {
+                  tr: "Ara sıra hatırlıyor ve düşünüyorum",
+                  en: "I remember and think about it from time to time",
+                },
+                knowledgeDelta: 0,
+                practiceDelta: 0,
+                heartDelta: +1,
+              },
+              {
+                value: "c",
+                text: {
+                  tr: "Düzenli olarak içimden tekrar ediyor, anlamını hatırlamaya çalışıyorum",
+                  en: "I regularly repeat it inwardly and try to recall its meaning",
+                },
+                knowledgeDelta: +2,
+                practiceDelta: +1,
+                heartDelta: +3,
+              },
+              {
+                value: "d",
+                text: {
+                  tr: "Hem dilimde hem kalbimde, hayat tercihleriyle de bağlı hissetmeye çalışıyorum",
+                  en: "I try to keep it on my tongue, in my heart and reflected in life choices",
+                },
+                knowledgeDelta: +3,
+                practiceDelta: +3,
+                heartDelta: +4,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: "ibadah",
+        title: {
+          tr: "Namaz, Kur’an ve ibadet düzeni",
+          en: "Prayer, Qur’an and worship routine",
+        },
+        desc: {
+          tr: "Namaz, müminin direğidir; Kur’an, kalbin nurudur. İbadetlerdeki hâl, hazırlığın merkezindedir.",
+          en: "Prayer is the pillar of faith; the Qur’an is light for the heart. Your worship is central to readiness.",
+        },
+        questions: [
+          {
+            id: "prayer_consistency",
+            text: {
+              tr: "Beş vakit namaz konusunda genel hâlin hangisine daha yakın?",
+              en: "Which best describes your overall state with the five daily prayers?",
+            },
+            options: [
+              {
+                value: "a",
+                text: {
+                  tr: "Çoğu zaman kılmıyorum / çok seyrek kılıyorum",
+                  en: "I often do not pray or do so very rarely",
+                },
+                knowledgeDelta: -4,
+                practiceDelta: -12,
+                heartDelta: -5,
+              },
+              {
+                value: "b",
+                text: {
+                  tr: "Ara sıra kılıyorum, uzun boşluklar oluyor",
+                  en: "I pray sometimes but with long gaps",
+                },
+                knowledgeDelta: -1,
+                practiceDelta: -6,
+                heartDelta: -3,
+              },
+              {
+                value: "c",
+                text: {
+                  tr: "Genelde kılıyorum ama bazen geciktiriyor veya kaçırıyorum",
+                  en: "I usually pray but sometimes delay or miss prayers",
+                },
+                knowledgeDelta: +1,
+                practiceDelta: +2,
+                heartDelta: +1,
+              },
+              {
+                value: "d",
+                text: {
+                  tr: "Mümkün olduğunca vaktinde, huşu ile kılmaya çalışıyorum",
+                  en: "I strive to pray on time with presence and humility as much as I can",
+                },
+                knowledgeDelta: +2,
+                practiceDelta: +8,
+                heartDelta: +4,
+              },
+            ],
+          },
+          {
+            id: "quran_relation",
+            text: {
+              tr: "Kur’an’la olan ilişkin hangisine daha çok benziyor?",
+              en: "Which best describes your relationship with the Qur’an?",
+            },
+            options: [
+              {
+                value: "a",
+                text: {
+                  tr: "Nadiren açıyorum; aylar geçebiliyor",
+                  en: "I rarely open it; months can pass without reading",
+                },
+                knowledgeDelta: -6,
+                practiceDelta: -3,
+                heartDelta: -4,
+              },
+              {
+                value: "b",
+                text: {
+                  tr: "Arada sırada okuyorum ama düzenli değil",
+                  en: "I read occasionally but without a stable routine",
+                },
+                knowledgeDelta: -1,
+                practiceDelta: 0,
+                heartDelta: 0,
+              },
+              {
+                value: "c",
+                text: {
+                  tr: "Düzenli bir okuma/meal programım var",
+                  en: "I have a somewhat regular reading / reflection routine",
+                },
+                knowledgeDelta: +4,
+                practiceDelta: +2,
+                heartDelta: +3,
+              },
+              {
+                value: "d",
+                text: {
+                  tr: "Hem tilavet hem anlam üzerinde ciddi şekilde çalışıyorum",
+                  en: "I seriously work on both recitation and understanding",
+                },
+                knowledgeDelta: +6,
+                practiceDelta: +4,
+                heartDelta: +4,
+              },
+            ],
+          },
+          {
+            id: "other_ibadah",
+            text: {
+              tr: "Farz ibadetler dışında (oruç, sadaka, zikir, gece ibadeti vb.) hâlini nasıl tarif edersin?",
+              en: "How would you describe yourself in voluntary acts (fasting, charity, dhikr, night prayer, etc.) beyond the obligatory ones?",
+            },
+            options: [
+              {
+                value: "a",
+                text: {
+                  tr: "Neredeyse hiç yok diyebilirim",
+                  en: "Almost none, to be honest",
+                },
+                knowledgeDelta: -1,
+                practiceDelta: -6,
+                heartDelta: -3,
+              },
+              {
+                value: "b",
+                text: {
+                  tr: "Bazı dönemler yapıyorum, sonra bırakıyorum",
+                  en: "I do them in some periods, then drop them",
+                },
+                knowledgeDelta: 0,
+                practiceDelta: -1,
+                heartDelta: 0,
+              },
+              {
+                value: "c",
+                text: {
+                  tr: "Düzenli birkaç sünnet/nafile amelim var",
+                  en: "I maintain a few consistent sunnah/nafl practices",
+                },
+                knowledgeDelta: +2,
+                practiceDelta: +4,
+                heartDelta: +3,
+              },
+              {
+                value: "d",
+                text: {
+                  tr: "Hayatımın planını bu ibadetler etrafında kurmaya çalışıyorum",
+                  en: "I actively shape my life around these acts of worship",
+                },
+                knowledgeDelta: +3,
+                practiceDelta: +6,
+                heartDelta: +4,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: "akhlaq",
+        title: {
+          tr: "Ahlak, nefis ve kul hakları",
+          en: "Character, ego and people’s rights",
+        },
+        desc: {
+          tr: "Peygamber Efendimiz’in ahlakı Kur’an’dı. Kibir, gıybet, zulüm ve kul hakkı ahirette ağır sonuçlar doğurabilir.",
+          en: "The Prophet’s character was the Qur’an. Pride, backbiting, injustice and violating others’ rights can weigh heavily in the Hereafter.",
+        },
+        questions: [
+          {
+            id: "akhlaq_family",
+            text: {
+              tr: "Aile bireylerine (anne-baba, eş, çocuk, kardeş vs.) karşı ahlak ve nezaket hâlin nasıldır?",
+              en: "How is your character and kindness towards close family (parents, spouse, children, siblings etc.)?",
+            },
+            options: [
+              {
+                value: "a",
+                text: {
+                  tr: "Çoğu zaman kırıcı, öfkeli veya ihmal edici olabiliyorum",
+                  en: "I am often harsh, angry or neglectful with them",
+                },
+                knowledgeDelta: -2,
+                practiceDelta: -6,
+                heartDelta: -6,
+              },
+              {
+                value: "b",
+                text: {
+                  tr: "Niyetim iyi ama sık sık öfkeye kapılıyorum",
+                  en: "My intention is good but I often lose my temper",
+                },
+                knowledgeDelta: 0,
+                practiceDelta: -3,
+                heartDelta: -2,
+              },
+              {
+                value: "c",
+                text: {
+                  tr: "Genelde saygılı ve nazik olmaya çalışıyorum",
+                  en: "I generally try to be respectful and kind",
+                },
+                knowledgeDelta: +1,
+                practiceDelta: +3,
+                heartDelta: +3,
+              },
+              {
+                value: "d",
+                text: {
+                  tr: "Bilerek onlara özel ilgi, sabır ve ikram göstermeye çalışıyorum",
+                  en: "I consciously show special patience, care and generosity to them",
+                },
+                knowledgeDelta: +2,
+                practiceDelta: +5,
+                heartDelta: +4,
+              },
+            ],
+          },
+          {
+            id: "akhlaq_backbiting",
+            text: {
+              tr: "Gıybet (dedikodu) ve insanları arkadan çekiştirme konusunda durumun nedir?",
+              en: "How do you deal with backbiting and speaking badly about people in their absence?",
+            },
+            options: [
+              {
+                value: "a",
+                text: {
+                  tr: "Çoğu ortamda gıybet ediyorum, bundan pek rahatsız olmuyorum",
+                  en: "I often join backbiting and I don’t feel much discomfort about it",
+                },
+                knowledgeDelta: -3,
+                practiceDelta: -7,
+                heartDelta: -5,
+              },
+              {
+                value: "b",
+                text: {
+                  tr: "Bazen katılıyorum ama sonra pişman oluyorum",
+                  en: "Sometimes I join but feel regret afterwards",
+                },
+                knowledgeDelta: 0,
+                practiceDelta: -3,
+                heartDelta: -1,
+              },
+              {
+                value: "c",
+                text: {
+                  tr: "Elimden geldiğince uzak durmaya ve ortamı değiştirmeye çalışıyorum",
+                  en: "I actively try to avoid it and change the topic when I can",
+                },
+                knowledgeDelta: +2,
+                practiceDelta: +4,
+                heartDelta: +3,
+              },
+              {
+                value: "d",
+                text: {
+                  tr: "Gıybetten sakınma konusunda bilinçli, kararlı ve dikkatliyim",
+                  en: "I am very conscious and firm about avoiding backbiting",
+                },
+                knowledgeDelta: +3,
+                practiceDelta: +6,
+                heartDelta: +4,
+              },
+            ],
+          },
+          {
+            id: "akhlaq_oppression",
+            text: {
+              tr: "İş, aile, arkadaşlık gibi alanlarda insanların hakkına girmek (emek, mal, itibar) konusunda kendini nasıl görüyorsun?",
+              en: "In work, family or friendships, how do you see yourself regarding people’s rights (their effort, wealth, honour)?",
+            },
+            options: [
+              {
+                value: "a",
+                text: {
+                  tr: "Menfaatim için başkalarına haksızlık yaptığım oluyor ve çok sorgulamıyorum",
+                  en: "I sometimes wrong others for my benefit and don’t think much about it",
+                },
+                knowledgeDelta: -3,
+                practiceDelta: -8,
+                heartDelta: -5,
+              },
+              {
+                value: "b",
+                text: {
+                  tr: "Zaman zaman hata yaptığımı biliyorum ama net bir muhasebe yapmıyorum",
+                  en: "I know I sometimes wrong people but I don’t deeply review it",
+                },
+                knowledgeDelta: 0,
+                practiceDelta: -3,
+                heartDelta: -2,
+              },
+              {
+                value: "c",
+                text: {
+                  tr: "Haksızlık yaptığımda fark etmeye ve helallik istemeye çalışıyorum",
+                  en: "I try to notice when I wrong someone and ask forgiveness",
+                },
+                knowledgeDelta: +2,
+                practiceDelta: +4,
+                heartDelta: +3,
+              },
+              {
+                value: "d",
+                text: {
+                  tr: "Hak ihlali konusunda çok hassasım, emin olamadığımda bile helalleşmeye çalışıyorum",
+                  en: "I’m very sensitive about people’s rights and seek to reconcile even in doubtful cases",
+                },
+                knowledgeDelta: +3,
+                practiceDelta: +6,
+                heartDelta: +4,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: "ilm",
+        title: {
+          tr: "İlim & öğrenme gayreti",
+          en: "Knowledge & learning effort",
+        },
+        desc: {
+          tr: "Salih bir hayat için farz olan ilmi öğrenmek, amelden önce gelir.",
+          en: "Seeking the obligatory knowledge precedes acting upon it.",
+        },
+        questions: [
+          {
+            id: "ilm_basic",
+            text: {
+              tr: "Farz olan ibadetler (namaz, oruç, zekât, helal/haram) hakkında temel ilmihal bilgin hangi seviyede?",
+              en: "How is your basic knowledge of the rulings of obligatory acts (prayer, fasting, zakah, halal/haram)?",
+            },
+            options: [
+              {
+                value: "a",
+                text: {
+                  tr: "Çok zayıf; çoğunu kulaktan dolma biliyorum",
+                  en: "Very weak; mostly hearsay and unclear",
+                },
+                knowledgeDelta: -10,
+                practiceDelta: -4,
+                heartDelta: -3,
+              },
+              {
+                value: "b",
+                text: {
+                  tr: "Bazı şeyleri biliyorum ama eksiklerim çok",
+                  en: "I know some basics but I have many gaps",
+                },
+                knowledgeDelta: -3,
+                practiceDelta: -1,
+                heartDelta: 0,
+              },
+              {
+                value: "c",
+                text: {
+                  tr: "Genel olarak temel konularda sağlam olduğumu düşünüyorum",
+                  en: "I think I’m reasonably solid in the fundamentals",
+                },
+                knowledgeDelta: +4,
+                practiceDelta: +2,
+                heartDelta: +2,
+              },
+              {
+                value: "d",
+                text: {
+                  tr: "Hem temel hem bazı detaylarda düzenli ilim halkalarına/derse devam ediyorum",
+                  en: "I regularly attend classes or circles and cover both basics and some detail issues",
+                },
+                knowledgeDelta: +8,
+                practiceDelta: +4,
+                heartDelta: +3,
+              },
+            ],
+          },
+          {
+            id: "ilm_continuity",
+            text: {
+              tr: "İlmi devam ettirme (kitap okumak, ders dinlemek, not almak, tekrar etmek) konusunda hâlin nasıldır?",
+              en: "How consistent are you in continuing to seek knowledge (reading, listening to lessons, taking notes, revising)?",
+            },
+            options: [
+              {
+                value: "a",
+                text: {
+                  tr: "Dönem dönem hevesleniyorum ama uzun süre devam ettiremiyorum",
+                  en: "I get motivated in phases but can’t sustain it for long",
+                },
+                knowledgeDelta: -2,
+                practiceDelta: -1,
+                heartDelta: 0,
+              },
+              {
+                value: "b",
+                text: {
+                  tr: "Ayda birkaç kez ilimle bilinçli vakit geçiriyorum",
+                  en: "I spend deliberate time on knowledge a few times per month",
+                },
+                knowledgeDelta: +2,
+                practiceDelta: +1,
+                heartDelta: +1,
+              },
+              {
+                value: "c",
+                text: {
+                  tr: "Haftalık rutinin içinde mutlaka ilme yer veriyorum",
+                  en: "I keep learning as a weekly routine",
+                },
+                knowledgeDelta: +4,
+                practiceDelta: +2,
+                heartDelta: +2,
+              },
+              {
+                value: "d",
+                text: {
+                  tr: "Hayat planımın merkezinde ilim ve onu yaşamak var",
+                  en: "Seeking and living knowledge is central in my life planning",
+                },
+                knowledgeDelta: +6,
+                practiceDelta: +3,
+                heartDelta: +3,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: "repentance",
+        title: {
+          tr: "Günah, tövbe & süreklilik",
+          en: "Sin, repentance & consistency",
+        },
+        desc: {
+          tr: "Her insan hata yapar; önemli olan tövbede sebat, günaha dönmeyi hafife almamaktır.",
+          en: "Every human errs; what matters is sincere repentance and not taking sin lightly.",
+        },
+        questions: [
+          {
+            id: "major_sins",
+            text: {
+              tr: "Bildiğin halde terk edemediğin ve kalbini rahatsız eden büyük günah(lar) hakkında hâlin nedir? (Detaya girmeden genel hâli soruyor.)",
+              en: "Regarding major sins you know and feel uneasy about (without details), which best describes your situation?",
+            },
+            options: [
+              {
+                value: "a",
+                text: {
+                  tr: "Bildiğim bazı büyük günahları işliyorum ve pek önemsemiyorum",
+                  en: "I commit some major sins knowingly and I don’t take them very seriously",
+                },
+                knowledgeDelta: -4,
+                practiceDelta: -12,
+                heartDelta: -10,
+              },
+              {
+                value: "b",
+                text: {
+                  tr: "Devam eden bir günahım var, üzülüyorum ama ciddi adım atmadım",
+                  en: "I have ongoing sin, I feel sad but haven’t taken serious steps yet",
+                },
+                knowledgeDelta: 0,
+                practiceDelta: -6,
+                heartDelta: -4,
+              },
+              {
+                value: "c",
+                text: {
+                  tr: "Tövbe etmeye çalışıyor, tekrar düştükçe yeniden ayağa kalkıyorum",
+                  en: "I keep repenting and trying again whenever I fall back",
+                },
+                knowledgeDelta: +1,
+                practiceDelta: +2,
+                heartDelta: +4,
+              },
+              {
+                value: "d",
+                text: {
+                  tr: "Bildiğim büyük günahlardan büyük oranda uzak durmaya gayret ediyorum",
+                  en: "I strive strongly to stay away from major sins I am aware of",
+                },
+                knowledgeDelta: +2,
+                practiceDelta: +6,
+                heartDelta: +6,
+              },
+            ],
+          },
+          {
+            id: "repentance_habit",
+            text: {
+              tr: "Günlük/haftalık olarak istiğfar (estağfirullah) ve tövbe alışkanlığın nasıldır?",
+              en: "How is your habit of daily/weekly istighfar (seeking forgiveness) and repentance?",
+            },
+            options: [
+              {
+                value: "a",
+                text: {
+                  tr: "Çok nadir, özel bir tövbe zamanım yok",
+                  en: "Very rare; I have no specific habit of repentance",
+                },
+                knowledgeDelta: -2,
+                practiceDelta: -3,
+                heartDelta: -6,
+              },
+              {
+                value: "b",
+                text: {
+                  tr: "Ara sıra istiğfar ediyorum ama dağınık",
+                  en: "I say it sometimes but it’s scattered",
+                },
+                knowledgeDelta: 0,
+                practiceDelta: 0,
+                heartDelta: -1,
+              },
+              {
+                value: "c",
+                text: {
+                  tr: "Her gün belli bir miktar istiğfar etmeye çalışıyorum",
+                  en: "I try to keep a daily habit of istighfar",
+                },
+                knowledgeDelta: +2,
+                practiceDelta: +2,
+                heartDelta: +4,
+              },
+              {
+                value: "d",
+                text: {
+                  tr: "Hem dilimle hem kalbimle muhasebeli bir istiğfar / tövbe düzenim var",
+                  en: "I regularly review myself and combine istighfar with sincere inner repentance",
+                },
+                knowledgeDelta: +3,
+                practiceDelta: +3,
+                heartDelta: +6,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: "heart_state",
+        title: {
+          tr: "Kalp hâli, dünya sevgisi & tevazu",
+          en: "Heart state, love of dunya & humility",
+        },
+        desc: {
+          tr: "Kalbin Allah’a yönelişi, riya, kibir, dünya sevgisi ve tevekkül hâli ahirete hazırlığın özüdür.",
+          en: "The heart’s direction, sincerity vs. showing off, arrogance, love of dunya and reliance on Allah are core to readiness.",
+        },
+        questions: [
+          {
+            id: "riyah",
+            text: {
+              tr: "İbadet ve hayır işlerinde riya (gösteriş) ve beğenilme isteğiyle mücadeleni nasıl görüyorsun?",
+              en: "How do you see your struggle with showing off or seeking people’s praise in worship and good deeds?",
+            },
+            options: [
+              {
+                value: "a",
+                text: {
+                  tr: "İnsanların görmesi ve takdiri benim için çok önemli; pek sorgulamıyorum",
+                  en: "Being seen and praised is very important to me and I rarely question it",
+                },
+                knowledgeDelta: -2,
+                practiceDelta: -2,
+                heartDelta: -8,
+              },
+              {
+                value: "b",
+                text: {
+                  tr: "Riyanın farkına varıyorum ama çoğu zaman kalbimi toparlayamıyorum",
+                  en: "I notice it but often fail to correct my heart",
+                },
+                knowledgeDelta: 0,
+                practiceDelta: 0,
+                heartDelta: -3,
+              },
+              {
+                value: "c",
+                text: {
+                  tr: "Fark ettikçe niyeti düzeltmeye çalışıyorum, dua ve istiğfar ediyorum",
+                  en: "When I notice it, I renew my intention, make dua and seek forgiveness",
+                },
+                knowledgeDelta: +2,
+                practiceDelta: +1,
+                heartDelta: +4,
+              },
+              {
+                value: "d",
+                text: {
+                  tr: "Niyet muhasebesini çok ciddiye alıyor, gizli amelleri özellikle arttırıyorum",
+                  en: "I take intention very seriously and try to increase hidden deeds",
+                },
+                knowledgeDelta: +3,
+                practiceDelta: +3,
+                heartDelta: +6,
+              },
+            ],
+          },
+          {
+            id: "dunya_love",
+            text: {
+              tr: "Kalbinde dünya sevgisi (mal, makam, şöhret) ile ahiret arzusu arasındaki dengeyi nasıl hissediyorsun?",
+              en: "How do you feel the balance between love of dunya (wealth, status, fame) and longing for the Hereafter in your heart?",
+            },
+            options: [
+              {
+                value: "a",
+                text: {
+                  tr: "Dünya hedeflerim neredeyse tamamen ön planda, ahireti pek düşünmüyorum",
+                  en: "My worldly goals dominate almost everything; I rarely think about the Hereafter",
+                },
+                knowledgeDelta: -2,
+                practiceDelta: -3,
+                heartDelta: -8,
+              },
+              {
+                value: "b",
+                text: {
+                  tr: "Ahireti de önemsiyorum ama günlük planımı genelde dünya belirliyor",
+                  en: "I do care about the Hereafter, but daily life is mostly driven by dunya",
+                },
+                knowledgeDelta: 0,
+                practiceDelta: -1,
+                heartDelta: -2,
+              },
+              {
+                value: "c",
+                text: {
+                  tr: "Dünya ile ahiret arasında denge kurmaya çalışıyorum",
+                  en: "I actively try to balance dunya and Akhirah in decisions",
+                },
+                knowledgeDelta: +2,
+                practiceDelta: +2,
+                heartDelta: +3,
+              },
+              {
+                value: "d",
+                text: {
+                  tr: "Tercihlerimde ahireti öne almayı ciddi şekilde gözetiyorum",
+                  en: "I consciously put the Hereafter first when making major choices",
+                },
+                knowledgeDelta: +3,
+                practiceDelta: +3,
+                heartDelta: +6,
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+    let currentLang = "tr";
+
+    function updateStaticTexts() {
+      const dict = uiText[currentLang];
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (!dict[key]) return;
+        if (dict[key].includes("<strong")) {
+          el.innerHTML = dict[key];
+        } else {
+          el.textContent = dict[key];
+        }
+      });
+    }
+
+    function renderQuestions() {
+      const container = document.getElementById("question-sections");
+      container.innerHTML = "";
+
+      let totalQuestions = 0;
+
+      questionSectionsDef.forEach((section, sectionIndex) => {
+        const secEl = document.createElement("div");
+        secEl.className = "question-section";
+
+        const header = document.createElement("div");
+        header.className = "question-section-header";
+
+        const title = document.createElement("div");
+        title.className = "question-section-title";
+        title.textContent = section.title[currentLang];
+
+        const desc = document.createElement("div");
+        desc.className = "question-section-desc";
+        desc.textContent = section.desc[currentLang];
+
+        header.appendChild(title);
+        header.appendChild(desc);
+        secEl.appendChild(header);
+
+        section.questions.forEach((q) => {
+          totalQuestions += 1;
+          const qEl = document.createElement("div");
+          qEl.className = "question";
+
+          const label = document.createElement("div");
+          label.className = "question-label";
+          label.textContent = q.text[currentLang];
+          qEl.appendChild(label);
+
+          const optsEl = document.createElement("div");
+          optsEl.className = "options";
+
+          q.options.forEach((opt) => {
+            const row = document.createElement("label");
+            row.className = "option-row";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = q.id;
+            input.value = opt.value;
+
+            const span = document.createElement("span");
+            span.className = "option-label";
+            span.textContent = opt.text[currentLang];
+
+            row.appendChild(input);
+            row.appendChild(span);
+            optsEl.appendChild(row);
+          });
+
+          qEl.appendChild(optsEl);
+          secEl.appendChild(qEl);
+        });
+
+        container.appendChild(secEl);
+
+        // staggered reveal
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            secEl.classList.add("visible");
+          }, 100 * sectionIndex);
+        });
+      });
+
+      container.dataset.totalQuestions = totalQuestions;
+      updateProgress();
+    }
+
+    function clamp(num, min, max) {
+      return Math.min(Math.max(num, min), max);
+    }
+
+    function updateProgress() {
+      const form = document.getElementById("assessment-form");
+      const container = document.getElementById("question-sections");
+      const totalQuestions = parseInt(container.dataset.totalQuestions || "0", 10);
+      const answered = form.querySelectorAll(
+        "input[type='radio']:checked"
+      ).length;
+
+      const dict = uiText[currentLang];
+      const progressText = document.getElementById("progress-text");
+      if (dict.progressText.includes("Yanıtlanan")) {
+        progressText.textContent = `Yanıtlanan soru: ${answered} / ${totalQuestions}`;
+      } else {
+        progressText.textContent = `Answered questions: ${answered} / ${totalQuestions}`;
+      }
+
+      const fill = document.getElementById("progress-fill");
+      const ratio = totalQuestions ? (answered / totalQuestions) * 100 : 0;
+      fill.style.width = `${ratio}%`;
+    }
+
+    function interpretDimension(score, dim, lang) {
+      const low = score < 50;
+      const mid = score >= 50 && score < 75;
+      const high = score >= 75;
+
+      if (lang === "tr") {
+        if (dim === "knowledge") {
+          if (low)
+            return "Temel dini bilgi alanında güçlendirmeye ihtiyaç olabilir. İlmihal, Kur’an ve sahih hadis derslerine yönelmek çok kıymetli olur.";
+          if (mid)
+            return "İlim boyutunda orta bir seviyedesin. Bildiklerini derinleştirip bilmediklerini öğrenmeye niyet etmek, ahirete hazırlığını güçlendirebilir.";
+          if (high)
+            return "İlim boyutun güçlü görünüyor. Bildiklerini yaşayan biri olmak ve onu güzel ahlakla birleştirmek en önemli adım.";
+        } else if (dim === "practice") {
+          if (low)
+            return "Amel boyutunda ciddi boşluklar olabilir. Farzları sağlamlaştırmak ve yavaş yavaş sünnetleri eklemek, en öncelikli adımlardan biridir.";
+          if (mid)
+            return "Amel boyutun ne tamamen zayıf ne de çok güçlü. Farzlarda istikrar ve küçük ama düzenli nafileler seni ileri taşıyabilir.";
+          if (high)
+            return "Amel boyutun umut verici bir seviyede. İstikrarı korumak ve amelleri riya ve kibirden korumak en büyük imtihanlardan biridir.";
+        } else if (dim === "heart") {
+          if (low)
+            return "Kalp boyutunda (niyet, tevazu, dünya sevgisi, tövbe) kırılganlıklar olabilir. Dua, istiğfar ve tefekkürle kalbi yumuşatmak önemli.";
+          if (mid)
+            return "Kalp boyutunda iniş çıkışlar olsa da belli bir farkındalık var. Niyetlerini sık sık tazelemek ve gizli amelleri artırmak bu alanı güçlendirebilir.";
+          if (high)
+            return "Kalp boyutun nispeten dengeli görünüyor. Bu hâli korumak için sürekli dua, istiğfar ve kendini gizli amellerle beslemek çok kıymetlidir.";
+        }
+      } else {
+        if (dim === "knowledge") {
+          if (low)
+            return "Your basic Islamic knowledge may need strengthening. Studying core fiqh, Qur’an and authentic hadith is a precious step.";
+          if (mid)
+            return "Your knowledge dimension is at a moderate level. Deepening what you know and learning what you do not can greatly support your readiness.";
+          if (high)
+            return "Your knowledge dimension looks strong. Living what you know with good character is now the main challenge.";
+        } else if (dim === "practice") {
+          if (low)
+            return "There may be serious gaps in practice. Establishing the obligatory acts and slowly adding consistent voluntary deeds is a top priority.";
+          if (mid)
+            return "Your practice is neither very weak nor very strong. Consistency in obligations and small, regular extra deeds can move you forward.";
+          if (high)
+            return "Your practice looks hopeful. Protecting it from laziness and showing off is a major lifelong test.";
+        } else if (dim === "heart") {
+          if (low)
+            return "Your heart dimension (intention, humility, love of dunya, repentance) may be fragile. Dua, istighfar and reflection can soften and realign the heart.";
+          if (mid)
+            return "Your heart dimension has ups and downs but some awareness. Frequently renewing intention and increasing hidden deeds can strengthen this.";
+          if (high)
+            return "Your heart dimension looks relatively balanced. Keeping it that way with constant dua, istighfar and hidden good deeds is very precious.";
+        }
+      }
+      return "";
+    }
+
+    function buildInterpretation(k, p, h, readiness, age, faithLevel) {
+      const lang = currentLang;
+      let readinessNote = "";
+      if (lang === "tr") {
+        if (readiness >= 80) {
+          readinessNote =
+            "Genel Ahirete Hazırlık Skorun, niyet ve yöneliş açısından umut verici bir seviyede. Bu, emin olmak anlamına gelmez; bilakis, nimetin kıymetini bilip daha da ciddileşmek için bir davet gibidir.";
+        } else if (readiness >= 55) {
+          readinessNote =
+            "Genel skorun orta–iyi aralığında. Bazı güçlü yönlerin, bazı zayıf halkaların var. Küçük ama istikrarlı adımlarla bu dengeyi ahiret lehine çevirmek mümkün.";
+        } else {
+          readinessNote =
+            "Genel skorun daha kırılgan bir noktada olabilir. Bu bir ümitsizlik sebebi değil; bilakis tövbeye, ilme ve salih amele daha samimi sarılmak için uyarıcı bir işaret olarak görülebilir.";
+        }
+      } else {
+        if (readiness >= 80) {
+          readinessNote =
+            "Your overall Hereafter Readiness Score is at a hopeful level in terms of intention and direction. This is not a guarantee, but an invitation to honour this blessing and become even more serious.";
+        } else if (readiness >= 55) {
+          readinessNote =
+            "Your overall score is in a mid–good range. You have strengths and also weak links. Small but consistent steps can shift the balance strongly in favour of the Hereafter.";
+        } else {
+          readinessNote =
+            "Your score suggests some fragility. This is not a reason to despair; it is a wake-up call to cling more sincerely to repentance, knowledge and righteous deeds.";
+        }
+      }
+
+      let ageNote = "";
+      if (lang === "tr") {
+        ageNote =
+          "Unutma: Allah katında asıl önemli olan, şu andan itibaren yönünü nereye çevirdiğindir. Yaşın " +
+          age +
+          " olsa bile bir anda niyetini ve istikametini değiştirebilirsin.";
+      } else {
+        ageNote =
+          "Remember: what matters most with Allah is the direction you choose from this moment onward. Even at age " +
+          age +
+          ", you can re-orient your intention and path.";
+      }
+
+      let faithNote = "";
+      if (lang === "tr") {
+        if (faithLevel === "muslim_practicing") {
+          faithNote =
+            "Kendini iman ve amel yönünden bağlı görmen güzel bir niyet. Bu niyeti, sürekli tazelenen bir tevbe ve ihlasla beslemek çok önemlidir.";
+        } else if (faithLevel === "muslim_cultural") {
+          faithNote =
+            "İmanı daha çok kültürel yaşayanlar için bu tarz muhasebeler, dinle bağı yeniden canlandırmak için iyi bir fırsattır.";
+        } else if (faithLevel === "exploring") {
+          faithNote =
+            "İslam’ı araştırıyor olman kıymetli bir arayış. Soruların için güvenilir ilim ehli kişilerle ve sahih kaynaklarla ilerlemek en sağlıklı yoldur.";
+        } else if (faithLevel === "other") {
+          faithNote =
+            "Bu test, İslami bakış açısından hazırlanmıştır. Farklı bir inanç yolunda olsan da, ahlak, adalet ve kalp muhasebesi gibi başlıklar üzerine düşünmek senin için de faydalı olabilir.";
+        }
+      } else {
+        if (faithLevel === "muslim_practicing") {
+          faithNote =
+            "Seeing yourself as committed in belief and practice is a beautiful intention. Feeding it with constant repentance and sincerity is essential.";
+        } else if (faithLevel === "muslim_cultural") {
+          faithNote =
+            "For Muslims who mostly live Islam culturally, such self-accounting can be a chance to revive the connection with the Deen.";
+        } else if (faithLevel === "exploring") {
+          faithNote =
+            "Your exploration of Islam is valuable. Seek answers through reliable scholars and sound sources.";
+        } else if (faithLevel === "other") {
+          faithNote =
+            "This test is written from an Islamic perspective. Even if you follow another path, reflecting on justice, ethics and heart states may still benefit you.";
+        }
+      }
+
+      return readinessNote + " " + ageNote + " " + faithNote;
+    }
+
+    function addFocusChips(k, p, h) {
+      const chipRow = document.getElementById("focus-chip-row");
+      chipRow.innerHTML = "";
+      const lang = currentLang;
+
+      const chips = [];
+
+      if (k < 60) {
+        chips.push({
+          key: "knowledge",
+          labelTr: "📚 İlim / temel bilgi",
+          labelEn: "📚 Knowledge / basics",
+          descTr:
+            "İlim alanını güçlendirmek için güvenilir kaynaklardan düzenli ders/okuma planı yapabilirsin.",
+          descEn:
+            "You may benefit from a simple, regular plan to learn the basics from reliable sources.",
+        });
+      }
+      if (p < 60) {
+        chips.push({
+          key: "practice",
+          labelTr: "🕌 İbadet & amel",
+          labelEn: "🕌 Worship & practice",
+          descTr:
+            "Farzları sağlamlaştırıp küçük, sürdürülebilir nafilelerle ibadet yönünü güçlendirebilirsin.",
+          descEn:
+            "Strengthen obligations and add small, sustainable voluntary acts to support your practice.",
+        });
+      }
+      if (h < 60) {
+        chips.push({
+          key: "heart",
+          labelTr: "✨ Kalp, niyet & tövbe",
+          labelEn: "✨ Heart, intention & repentance",
+          descTr:
+            "Niyet tazeleme, istiğfar ve dua ile kalbini yumuşatmak bu alanda büyük fark oluşturabilir.",
+          descEn:
+            "Renewing intention, making istighfar and heartfelt duas can greatly impact your heart’s state.",
+        });
+      }
+
+      // If everything is strong, still show at least a gentle reminder
+      if (chips.length === 0) {
+        chips.push({
+          key: "maintenance",
+          labelTr: "🌱 İstikrarı koru",
+          labelEn: "🌱 Maintain consistency",
+          descTr:
+            "En büyük imtihanlardan biri, güzel hâli ihlasla korumaktır. Düzenli muhasebe buna yardımcı olur.",
+          descEn:
+            "One of the greatest tests is to preserve a good state with sincerity. Regular self-accounting helps.",
+        });
+      }
+
+      chips.forEach((chip) => {
+        const div = document.createElement("div");
+        div.className = "focus-chip";
+        const label = lang === "tr" ? chip.labelTr : chip.labelEn;
+        const desc = lang === "tr" ? chip.descTr : chip.descEn;
+        div.textContent = `${label} – ${desc}`;
+        chipRow.appendChild(div);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("loaded");
+      renderQuestions();
+      updateStaticTexts();
+
+      const langButtons = document.querySelectorAll(".lang-btn");
+      langButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const lang = btn.getAttribute("data-lang");
+          if (lang === currentLang) return;
+          currentLang = lang;
+          langButtons.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          const form = document.getElementById("assessment-form");
+          if (form) form.reset();
+          renderQuestions();
+          updateStaticTexts();
+        });
+      });
+
+      document.getElementById("start-btn").addEventListener("click", () => {
+        const formCard = document.getElementById("form-card");
+        formCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      document
+        .getElementById("scroll-info-btn")
+        .addEventListener("click", () => {
+          const infoCard = document.getElementById("info-card");
+          infoCard.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+
+      const form = document.getElementById("assessment-form");
+      form.addEventListener("change", updateProgress);
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const ageInput = document.getElementById("age-input");
+        const ageVal = parseInt(ageInput.value, 10);
+        if (isNaN(ageVal) || ageVal < 10 || ageVal > 100) {
+          ageInput.focus();
+          ageInput.scrollIntoView({ behavior: "smooth", block: "center" });
+          return;
+        }
+
+        let knowledge = 50;
+        let practice = 50;
+        let heart = 50;
+
+        questionSectionsDef.forEach((section) => {
+          section.questions.forEach((q) => {
+            const selected = form.querySelector(`input[name="${q.id}"]:checked`);
+            if (!selected) return;
+            const value = selected.value;
+            const opt = q.options.find((o) => o.value === value);
+            if (!opt) return;
+            knowledge += opt.knowledgeDelta || 0;
+            practice += opt.practiceDelta || 0;
+            heart += opt.heartDelta || 0;
+          });
+        });
+
+        knowledge = clamp(Math.round(knowledge), 0, 100);
+        practice = clamp(Math.round(practice), 0, 100);
+        heart = clamp(Math.round(heart), 0, 100);
+        const readiness = clamp(
+          Math.round((knowledge + practice + heart) / 3),
+          0,
+          100
+        );
+
+        document.getElementById("res-age-chronological").textContent = ageVal;
+        document.getElementById("res-knowledge").textContent = knowledge;
+        document.getElementById("res-practice").textContent = practice;
+        document.getElementById("res-heart").textContent = heart;
+        document.getElementById("res-readiness").textContent = readiness;
+
+        document.getElementById("res-knowledge-tagline").textContent =
+          interpretDimension(knowledge, "knowledge", currentLang);
+        document.getElementById("res-practice-tagline").textContent =
+          interpretDimension(practice, "practice", currentLang);
+        document.getElementById("res-heart-tagline").textContent =
+          interpretDimension(heart, "heart", currentLang);
+
+        const faithLevel = document.getElementById("faith-level").value;
+        const interp = buildInterpretation(
+          knowledge,
+          practice,
+          heart,
+          readiness,
+          ageVal,
+          faithLevel
+        );
+        const resInterp = document.getElementById("res-interpretation");
+        resInterp.textContent = interp;
+
+        addFocusChips(knowledge, practice, heart);
+
+        const resultsCard = document.getElementById("results-card");
+        resultsCard.classList.add("visible");
+        resultsCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  </script>
+</body>
+</html>
